@@ -2,12 +2,11 @@
 
 @section('content')
 
-    <h2>タスク編集</h2>
+    <h1>タスク編集</h1>
 
     {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
 
-        {!! Form::label('content', 'メッセージ:') !!}
-        {!! Form::text('content') !!}
+        @include('tasks._form')
 
         {!! Form::submit('更新') !!}
 

@@ -41,8 +41,16 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create($request->all());
-        
+        $this->validate($request, [
+            'status' => 'required',
+            'content' => 'required|max:255',
+        ]);
+
+        $task = new Task;
+        $task->status = $request->status;
+        $task->content = $request->content;
+        $task->save();
+
         return redirect('/');
     }
 
@@ -79,9 +87,16 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'status' => 'required',
+            'content' => 'required|max:255',
+        ]);
+
         $task = Task::find($id);
-        $task->update($request->all());
-        
+        $task->status = $request->status;
+        $task->content = $request->content;
+        $task->save();
+
         return redirect('/');
     }
 
